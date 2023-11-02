@@ -32,14 +32,8 @@ export default function Socket() {
 
   return (
     <div className="container mx-auto">
-      <h1 className='text-center mb-3'>Socket React test</h1>
-      <form onSubmit={onSub} id="id_form" className="col-md-6 mx-auto d-flex align-items-center">
-        <label className='me-2'>Message:</label>
-        <input ref={inputRef} className="form-control me-1" id="id_input" />
-        <button className="btn btn-dark">Send</button>
-      </form>
-      <div className="border border-3 border-dark mx-auto col-md-6 mt-3 p-2" style={{ minHeight: "400px" }} id="div_message">
-        <div style={{ minHeight: "500px" }} className='p-2'>
+      <div className="chat-container border border-3 rounded-2 border-dark mx-auto col-md-6 mt-3" id="div_message">
+        <div className='chat-messages p-2'>
           {msg_ar.map((item, i) => {
             return (
               <div className={`d-flex align-items-center ${item.id === user_id ? 'justify-content-end' : ''}`}>
@@ -48,6 +42,10 @@ export default function Socket() {
             );
           })}
         </div>
+        <form onSubmit={onSub} className="chat-form bg-white p-2 d-flex align-items-center justify-content-center">
+          <input ref={inputRef} className="form-control me-1" id="id_input" />
+          <button className="btn btn-dark">Send</button>
+        </form>
       </div>
     </div>
   );

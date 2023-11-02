@@ -43,7 +43,7 @@ export default function Socket() {
           {msg_ar.map((item, i) => {
             return (
               <div className={`d-flex align-items-center ${item.id === user_id ? 'justify-content-end' : ''}`}>
-                <h4 dir={item.id === user_id ? 'rtl' : 'ltr'} className={`${item.id === user_id ? 'bg-success' : 'bg-dark bg-opacity-25'} col-4 rounded-2 text-white p-2`} key={i}>{item.msg}</h4>
+                <h4 className={`${item.id === user_id ? 'bg-success' : 'bg-dark bg-opacity-25'} col-4 rounded-2 text-white p-2`} key={i}>{item.msg}</h4>
               </div>
             );
           })}

@@ -1,10 +1,10 @@
 import "./App.css";
-import Socket from "./components/socket";
+import HomePage from "./components/task1/Home/HomePage";
 
 function App() {
   return (
     <div className="App">
-      <Socket />
+      <HomePage />
     </div>
   );
 }

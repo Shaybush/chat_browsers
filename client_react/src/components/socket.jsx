@@ -7,19 +7,17 @@ export default function Socket() {
   const time = new Date();
   const socket = io("http://localhost:3001/");
   const inputRef = useRef();
-  const userData = JSON.parse(localStorage.getItem("userData"))
-
+  const userData = JSON.parse(localStorage.getItem("userData"));
 
   //get all message from local storage 
   useEffect(() => {
-    const messages = JSON.parse(localStorage.getItem("messages"))
-    if(messages)
-    {
-      setAllMessage(messages)
+    const messages = JSON.parse(localStorage.getItem("messages"));
+    if (messages) {
+      setAllMessage(messages);
     }
-    
-  }, [])
-  
+
+  }, []);
+
   useEffect(() => {
     socket.on("nodeObjEvent", onServerListen);
     return () => {
@@ -28,8 +26,8 @@ export default function Socket() {
     };
   });
   const onServerListen = (_item) => {
-    setAllMessage([...allMessage, _item]);
-    allMessage.push(_item)
+    setAllMessage((prev) => [...prev, _item]);
+    allMessage.push(_item);
     //save messages on 
     localStorage.setItem('messages', JSON.stringify(allMessage));
   };
@@ -52,14 +50,14 @@ export default function Socket() {
             return (
               <div className={`d-flex align-items-center text-wrap ${item.id === userData.id ? 'justify-content-end' : ''}`}>
                 <h4 className={`${item.id === userData.id ? 'bg-success' : 'bg-dark bg-opacity-25'} col-4 rounded-2 text-black p-2 w-30 text-break text-right text-end`} key={i}>
-                  {item.msg}  
+                  {item.msg}
                   <div className="d-flex flex-row-reverse grow-5">
-                  <div className='text-muted text-sm mt-3'>
-                    {item.hours}:{item.minutes}
+                    <div className='text-muted text-sm mt-3'>
+                      {item.hours}:{item.minutes}
                     </div>
-                  <img src={userData.picture} className="rounded-pill"/>
+                    <img src={userData.picture} className="rounded-pill" />
                   </div>
-                  </h4>
+                </h4>
               </div>
             );
           })}

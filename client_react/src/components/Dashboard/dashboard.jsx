@@ -2,7 +2,7 @@ import React from 'react';
 import DropdownButton from 'react-bootstrap/esm/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { googleLogout } from "@react-oauth/google";
-import Socket from '../../../socket';
+import Socket from '../Socket/socket';
 
 const Dashboard = ({ existUser, setExistUser, setIsLogin }) => {
   // log out function to log the user out of google and set the profile array to null
@@ -23,7 +23,7 @@ const Dashboard = ({ existUser, setExistUser, setIsLogin }) => {
       </DropdownButton>
 
       {/* chat socket */}
-      <Socket />
+      <Socket existUser={existUser}/>
     </div>
   );
 };

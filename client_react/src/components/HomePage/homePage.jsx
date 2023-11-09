@@ -1,17 +1,12 @@
-import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Dashboard from "./dashboard";
+import Dashboard from "../Dashboard";
+import ButtonGoogleAuth from '../Buttons/ButtonGoogleAuth';
 
-const HomePage = () => {
+const homePage = () => {
   const [user, setUser] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
   const [existUser, setExistUser] = useState(null);
-
-  const login = useGoogleLogin({
-    onSuccess: (codeResponse) => setUser(codeResponse),
-    onError: (error) => console.log("Login Failed:", error),
-  });
 
   useEffect(() => {
     let isUserCheck = localStorageCheck();
@@ -76,21 +71,11 @@ const HomePage = () => {
   return (
     <div>
       {
-        isLogin ?
-          <Dashboard existUser={existUser} setExistUser={setExistUser} setIsLogin={setIsLogin} /> :
-
-          <div className="h-100 d-inline-block w-100 d-flex justify-content-center align-items-center">
-            {/* google button  */}
-            <a className="btn btn-lg btn-google btn-outline">
-              <button onClick={() => login()} className="bg-transparent border border-white">
-                <img src="https://img.icons8.com/color/16/000000/google-logo.png" />
-                Signup Using Google
-              </button>
-            </a>
-          </div>
+          isLogin ?
+          <Dashboard existUser={existUser} setExistUser={setExistUser} setIsLogin={setIsLogin} /> : <ButtonGoogleAuth setUser={setUser}/>
       }
     </div>
   );
 };
 
-export default HomePage;
+export default homePage;

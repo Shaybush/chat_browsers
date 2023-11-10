@@ -12,8 +12,13 @@ code {
     monospace;
 }
 
+p {
+  margin: 0;
+  padding: 0;
+}
+
 .chat-container {
-  height: calc(90vh - 100px);
+  height: calc(90vh - 150px);
   overflow-y: auto;
 }
 
@@ -57,7 +62,64 @@ code {
 .rounded-pill {
   width: 10%;
   height: 35px;
-  margin-top: auto;
   margin-right: 5px;
 }
 /* chat style - image profile - end */
+
+/* colors */
+
+/* text color */
+.text-teal-green {
+  color: #128c7e;
+}
+
+.text-teal-dark {
+  color: #075e54;
+}
+
+.text-light-green {
+  color: #25d366;
+}
+
+.text-blue {
+  color: #34b7f1;
+}
+/* text color - end */
+
+/* bg */
+.bg-teal-green {
+  background-color: #128c7e;
+}
+
+.bg-teal-dark {
+  background-color: #075e54;
+}
+
+.bg-light-green {
+  background-color: #25d366;
+}
+
+.bg-blue {
+  background-color: #34b7f1;
+}
+/* bg - end */
+
+/* borders */
+.border-teal-green {
+  border: 1px solid #128c7e;
+}
+
+.border-teal-dark {
+  border: 1px solid #075e54;
+}
+
+.border-light-green {
+  border: 1px solid #25d366;
+}
+
+.border-blue {
+  border: 1px solid #34b7f1;
+}
+/* borders - end */
+
+/* colors - end */

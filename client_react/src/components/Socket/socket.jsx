@@ -26,8 +26,7 @@ export default function Socket() {
   });
 
   const onServerListen = (_item) => {
-    if(_item.msg !== "")
-    {    
+    if (_item.msg !== "") {
       setAllMessage((prev) => [...prev, _item]);
       allMessage.push(_item);
       //save messages on 
@@ -42,34 +41,33 @@ export default function Socket() {
       id: userData.id,
       hours: time.getHours() < 10 ? "0" + time.getHours() : time.getHours(),
       minutes: time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes(),
-      img : userData.picture,
+      img: userData.picture,
     };
     inputRef.current.value = "";
     socket.emit("clientObjEvent", item);
   };
-  
+
   return (
     <div className="container">
       <div className="w-100 border border-3 rounded-2 border-dark mx-auto col-md-6 mt-3 " id="div_message">
         <div className='p-2 chat-container'>
           {allMessage.map((item, i) => {
             return (
-              <div className={`d-flex align-items-center text-wrap ${item.id === userData.id ? 'justify-content-end' : ''}`} key={i}>
-                <h4 className={`${item.id === userData.id ? 'bg-success' : 'bg-dark bg-opacity-25'} col-4 text-black p-2 text-break text-right text-end rounded-left`} key={i}>
-                  {item.msg}
-                  <div className="d-flex flex-row-reverse grow-5">
-                    <div className='text-muted text-sm mt-3'>
+              <div className={`d-flex align-items-center p-2 text-wrap ${item.id === userData.id ? 'justify-content-end' : ''}`} key={i}>
+                <div className={`${item.id === userData.id ? 'bg-teal-dark' : 'bg-dark bg-opacity-50'} col-auto mw-100 text-black py-2 px-3 mb-3 text-break text-right text-end rounded`}>
+                  <h4 className='text-white'>
+                    {item.msg}
+                    <p className='text-muted text-sm mt-2'>
                       {item.hours}:{item.minutes}
-                    </div>
-                    <img src={item.img} className="rounded-pill" />
-                  </div>
-                </h4>
+                    </p>
+                  </h4>
+                </div>
               </div>
             );
           })}
         </div>
         <form onSubmit={onSub} className="chat-form bg-white p-2 d-flex align-items-center justify-content-center">
-          <input ref={inputRef} className="form-control me-1" id="id_input" placeholder='Type here...'/>
+          <input ref={inputRef} className="form-control me-1" id="id_input" placeholder='Type here...' />
           <button className="btn btn-dark">Send</button>
         </form>
       </div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Dashboard from "../Dashboard";
-import ButtonGoogleAuth from '../Buttons/ButtonGoogleAuth';
+import Dashboard from "../dashboard";
+import ButtonGoogleAuth from "../ButtonGoogleAuth";
 
 const homePage = () => {
   const [user, setUser] = useState([]);
@@ -71,8 +71,8 @@ const homePage = () => {
   return (
     <div>
       {
-          isLogin ?
-          <Dashboard existUser={existUser} setExistUser={setExistUser} setIsLogin={setIsLogin} /> : <ButtonGoogleAuth setUser={setUser}/>
+        isLogin ?
+          <Dashboard existUser={existUser} setExistUser={setExistUser} setIsLogin={setIsLogin} /> : <ButtonGoogleAuth setUser={setUser} />
       }
     </div>
   );

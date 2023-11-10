@@ -2,7 +2,7 @@ import React from 'react';
 import DropdownButton from 'react-bootstrap/esm/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { googleLogout } from "@react-oauth/google";
-import Socket from '../Socket/socket';
+import Socket from '../socket';
 
 const Dashboard = ({ existUser, setExistUser, setIsLogin }) => {
   // log out function to log the user out of google and set the profile array to null
@@ -16,14 +16,14 @@ const Dashboard = ({ existUser, setExistUser, setIsLogin }) => {
   return (
     <div className="text-end">
       {/* profile avatar */}
-      <DropdownButton id="dropdown-button" title={<img src={existUser.picture} className="rounded-circle" />}>
+      <DropdownButton id="dropdown-button" title={<img src={existUser.picture} className="rounded-circle me-5" />}>
         <Dropdown.Item onClick={() => logOut()}>
           LogOut
         </Dropdown.Item>
       </DropdownButton>
 
       {/* chat socket */}
-      <Socket existUser={existUser}/>
+      <Socket existUser={existUser} />
     </div>
   );
 };

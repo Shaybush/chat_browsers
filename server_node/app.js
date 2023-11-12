@@ -9,7 +9,6 @@ const { routesInit } = require("./routes/configRoutes");
 const { createSocket } = require("./sockets/appSocket");
 
 const app = express();
-
 app.use(express.json());
 // configure public to be public
 app.use(express.static(path.join(__dirname, "public")));

@@ -1,10 +1,11 @@
 import React from "react";
 import { useGoogleLogin } from "@react-oauth/google";
+import { useNavigate } from "react-router-dom";
 
-const ButtonGoogleAuth = ({setUser}) => {
-
+const ButtonGoogle = ({setUser}) => {
+  const navigate = useNavigate(); 
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => setUser(codeResponse),
+    onSuccess: (codeResponse) => {setUser(codeResponse),navigate("/chat")},
     onError: (error) => console.log("Login Failed:", error),
   });
 
@@ -21,4 +22,4 @@ const ButtonGoogleAuth = ({setUser}) => {
   );
 };
 
-export default ButtonGoogleAuth;
+export default ButtonGoogle;

@@ -1,0 +1,18 @@
+{
+  "name": "chat_browsers",
+  "version": "1.0.0",
+  "description": "chat with socket to communicate between two browsers remote",
+  "main": "index.js",
+  "scripts": {
+    "server": "cd ./server_node && npm start",
+    "server-i": "cd ./server_node && npm install",
+    "client": "cd ./client_react && npm start",
+    "client-i": "cd ./client_react && npm install",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev-install": "concurrently \"npm run server-i\" \"npm run client-i\""
+  },
+  "author": "Shay Bushary & Aviv Turgman",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

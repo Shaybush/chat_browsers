@@ -1,15 +1,15 @@
 import React, { Suspense, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import _Loader from "./components/Loader/_Loader";
+import Loader from "./components/loader";
 
 const AppRoutes = () => {
-    const Login = React.lazy(() => import("./components/HomePage/HomePage"));
-    const Chat = React.lazy(() => import("./components/HomePage/HomePage"));
-    const Map = React.lazy(() => import("./components/MapPage/Map"));
+    const Login = React.lazy(() => import("./components/homePage/homePage"));
+    const Chat = React.lazy(() => import("./components/homePage/homePage"));
+    const Map = React.lazy(() => import("./components/mapTracker/mapTracker"));
     return (
             <Suspense  fallback={
                 <div className="w-100 h-screen flex items-center justify-center">
-                  <_Loader load={true} height="400" width="400" />
+                  <Loader load={true} height="400" width="400" />
                 </div>
               }>
                 <Router>

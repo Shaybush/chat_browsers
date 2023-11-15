@@ -11,18 +11,11 @@ const Dashboard = ({ existUser, setExistUser, setIsLogin }) => {
   // log out function to log the user out of google and set the profile array to null
   const logOut = () => {
     googleLogout();
-    existUser = null;
     localStorage.removeItem("userData");
+    setExistUser(null)
     setIsLogin(false);
     navigate("/")
   };
-
-  
-  // if(existUser === undefined){
-  //   existUser = JSON.parse(localStorage.getItem("userData"))
-  //   console.log(existUser)
-  //    setIsLogin(false);
-  // }
 
   return (
     <div className="text-end">

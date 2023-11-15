@@ -1,1 +1,1 @@
-export { default } from './_Loader'
+export { default } from './loader'

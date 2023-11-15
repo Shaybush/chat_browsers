@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Dashboard from "../DashboardPage";
-import ButtonGoogle from './../ButtonGoogleAuth/ButtonGoogle';
+import Dashboard from "../dashboardPage";
+import ButtonGoogle from '../buttonGoogleAuth/buttonGoogleAuth';
 
 const HomePage = () => {
   const [user, setUser] = useState([]);

@@ -27,8 +27,7 @@ export default function Socket() {
 
   const onServerListen = (_item) => {
     if (_item.msg !== "") {
-      setAllMessage((prev) => [...prev, _item]);
-      allMessage.push(_item);
+      setAllMessage((prev) => [...prev, { ..._item, msg: _item.msg.trim() }]);
       //save messages on 
       localStorage.setItem('messages', JSON.stringify(allMessage));
     }

@@ -16,7 +16,7 @@ const Dashboard = ({ existUser, setExistUser, setIsLogin }) => {
   return (
     <div className="text-end">
       {/* profile avatar */}
-      <DropdownButton id="dropdown-button" title={<img src={existUser.picture} className="rounded-circle me-5" />}>
+      <DropdownButton id="dropdown-button" title={<img src={existUser?.picture} className="rounded-circle me-5" />}>
         <Dropdown.Item onClick={() => logOut()}>
           LogOut
         </Dropdown.Item>

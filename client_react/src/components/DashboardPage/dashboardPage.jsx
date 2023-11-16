@@ -20,8 +20,8 @@ const Dashboard = ({ existUser, setExistUser, setIsLogin }) => {
   return (
     <div className="text-end">
       <div className="d-flex justify-content-lg-end">
-        <button onClick={() => { navigate("/map"); }} className="border-0 bg-transparent">
-          <img src={mapIcon} className="rounded-circle me-1" style={{ height: "100px" }} />
+        <button onClick={() => navigate("map")} className="border-0 bg-transparent">
+          <img src={mapIcon} className="rounded-circle me-1" width={50} />
         </button>
         {/* profile avatar */}
         <DropdownButton id="dropdown-button" title={<img src={existUser.picture} className="rounded-circle me-5" />}>

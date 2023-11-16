@@ -1,13 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Dashboard from "../dashboard";
-import ButtonGoogleAuth from "../ButtonGoogleAuth";
+import Dashboard from "../dashboardPage";
+import ButtonGoogle from '../buttonGoogleAuth/buttonGoogleAuth';
 
-const homePage = () => {
+const HomePage = () => {
   const [user, setUser] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
   const [existUser, setExistUser] = useState(null);
-
   useEffect(() => {
     let isUserCheck = localStorageCheck();
     if (isUserCheck)
@@ -72,10 +71,10 @@ const homePage = () => {
     <div>
       {
         isLogin ?
-          <Dashboard existUser={existUser} setExistUser={setExistUser} setIsLogin={setIsLogin} /> : <ButtonGoogleAuth setUser={setUser} />
+          <Dashboard existUser={existUser} setExistUser={setExistUser} setIsLogin={setIsLogin} /> : <ButtonGoogle setUser={setUser} />
       }
     </div>
   );
 };
 
-export default homePage;
+export default HomePage;

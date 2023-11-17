@@ -18,5 +18,9 @@ exports.createSocket = (server) => {
     socket.on("clientObjEvent", (item) => {
       io.sockets.emit("nodeObjEvent", item);
     });
+
+    socket.on("typing", (id,name) => {
+      socket.broadcast.emit("typing-from-server",id,name);
+    });
   });
 };

@@ -4,11 +4,12 @@ import { io } from "socket.io-client";
 export default function Socket() {
   // all the messages go here 
   const [allMessage, setAllMessage] = useState([]);
+  const [userNameFromSocket, setUserNameFromSocket] = useState("")
+  const [typing, setTyping] = useState(false);
   const time = new Date();
   const socket = io("http://localhost:3001/");
   const inputRef = useRef();
   const userData = JSON.parse(localStorage.getItem("userData"));
-
   //get all message from local storage 
   useEffect(() => {
     const messages = JSON.parse(localStorage.getItem("messages"));
@@ -25,6 +26,20 @@ export default function Socket() {
     };
   });
 
+  useEffect(() => {
+    socket.on("typing-from-server", (id,name) => {
+      // checking if received user typing is current user
+      if(userData.id !== id)
+      {
+        setUserNameFromSocket(name)
+        setTyping(true)  
+        setTimeout(() => {
+          setTyping(false);
+        },1000)
+      }
+    }, [socket])})
+
+  
   const onServerListen = (_item) => {
     if (_item.msg !== "") {
       setAllMessage((prev) => [...prev, { ..._item, msg: _item.msg.trim() }]);
@@ -65,8 +80,12 @@ export default function Socket() {
             );
           })}
         </div>
+        {/* user typing */}
+            {
+              typing ? <h6 className="d-flex m-2 mb-0 font-weight-bold"> {userNameFromSocket} typing...</h6> : null
+            }
         <form onSubmit={onSub} className="chat-form bg-white p-2 d-flex align-items-center justify-content-center">
-          <input ref={inputRef} className="form-control me-1" id="id_input" placeholder='Type here...' />
+          <input onChange={()=> socket.emit("typing",userData.id,userData.given_name)} ref={inputRef} className="form-control me-1" id="id_input" placeholder='Type here...' />
           <button className="btn btn-dark">Send</button>
         </form>
       </div>

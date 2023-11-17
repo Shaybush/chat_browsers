@@ -81,13 +81,10 @@ export default function Socket() {
             );
           })}
         </div>
-          <div className="d-flex m-2 mb-0">
+        {/* user typing */}
             {
-              typing ? <h6 className="font-weight-bold"> {userNameFromSocket} typing...</h6> : null
+              typing ? <h6 className="d-flex m-2 mb-0 font-weight-bold"> {userNameFromSocket} typing...</h6> : null
             }
-  
-          </div>
-       
         <form onSubmit={onSub} className="chat-form bg-white p-2 d-flex align-items-center justify-content-center">
           <input onChange={()=> socket.emit("typing",userData.id,userData.given_name)} ref={inputRef} className="form-control me-1" id="id_input" placeholder='Type here...' />
           <button className="btn btn-dark">Send</button>

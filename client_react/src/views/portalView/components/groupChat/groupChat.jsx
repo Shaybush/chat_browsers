@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { io } from "socket.io-client";
 
-export default function Socket() {
+const GroupChat = () => {
   // all the messages go here 
   const [allMessage, setAllMessage] = useState([]);
   const time = new Date();
@@ -72,4 +72,6 @@ export default function Socket() {
       </div>
     </div>
   );
-}
+};
+
+export default GroupChat;

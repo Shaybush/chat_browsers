@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Dashboard from "../dashboardPage";
-import ButtonGoogle from '../buttonGoogleAuth/buttonGoogleAuth';
+import Dashboard from "./components/dashboard";
+import LandingPage from "./components/landingPage";
 
-const HomePage = () => {
+const PortalView = () => {
   const [user, setUser] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
   const [existUser, setExistUser] = useState(null);
@@ -71,10 +71,10 @@ const HomePage = () => {
     <div>
       {
         isLogin ?
-          <Dashboard existUser={existUser} setExistUser={setExistUser} setIsLogin={setIsLogin} /> : <ButtonGoogle setUser={setUser} />
+          <Dashboard existUser={existUser} setExistUser={setExistUser} setIsLogin={setIsLogin} /> : <LandingPage setUser={setUser} />
       }
     </div>
   );
 };
 
-export default HomePage;
+export default PortalView;

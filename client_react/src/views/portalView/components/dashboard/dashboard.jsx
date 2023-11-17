@@ -2,8 +2,8 @@ import React from 'react';
 import DropdownButton from 'react-bootstrap/esm/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { googleLogout } from "@react-oauth/google";
-import Socket from '../socket';
-import mapIcon from "../../assets/icons/map.png";
+import Socket from '../groupChat';
+import mapIcon from "../../../../assets/icons/map.png";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = ({ existUser, setExistUser, setIsLogin }) => {

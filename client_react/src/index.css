@@ -123,3 +123,8 @@ p {
 /* borders - end */
 
 /* colors - end */
+
+/* typing style */
+.px-5{
+  padding-right: 130px!important;
+}

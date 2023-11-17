@@ -4,7 +4,7 @@ const express = require("express");
 const path = require("path");
 // aloud us to create service
 const http = require("http");
-//increasing memory
+// increasing memory
 require('events').EventEmitter.prototype._maxListeners = 70;
 
 const { routesInit } = require("./routes/configRoutes");

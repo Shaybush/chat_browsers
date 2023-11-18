@@ -19,7 +19,7 @@ const Dashboard = ({ existUser, setExistUser, setIsLogin }) => {
 
   return (
     <div className="text-end">
-      <div className="d-flex justify-content-lg-end">
+      <div className="d-flex justify-content-end">
         <button onClick={() => navigate("/map")} className="border-0 bg-transparent">
           <IconFile iconSrc={'map-icon'} styleClass='rounded-circle me-1' width={'30'} height={'30'} />
         </button>

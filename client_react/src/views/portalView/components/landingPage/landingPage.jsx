@@ -6,7 +6,7 @@ import IconFile from "../../../../shared/components/iconFile/iconFile";
 const LandingPage = ({ setUser }) => {
   const navigate = useNavigate();
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => { setUser(codeResponse), navigate("/chat"); },
+    onSuccess: (codeResponse) => { setUser(codeResponse), navigate("/"); },
     onError: (error) => console.log("Login Failed:", error),
   });
 

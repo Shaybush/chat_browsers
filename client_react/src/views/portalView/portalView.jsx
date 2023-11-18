@@ -16,7 +16,6 @@ const PortalView = () => {
   useEffect(() => {
     const isValid = async () => {
       if (user && user.access_token) {
-        alert("here");
         let response = await getUserDetailsFromAccessToken();
         if (response) {
           setExistUser(response.data);
@@ -51,8 +50,9 @@ const PortalView = () => {
   };
 
   const getUserDetailsFromAccessToken = () => {
+    alert("here");
     return axios.get(
-      `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+      `${import.meta.env.VITE_GOOGLE_AUTH_URL}/oauth2/v1/userinfo?access_token=${user.access_token}`,
       {
         headers: {
           Authorization: `Bearer ${user.access_token}`,

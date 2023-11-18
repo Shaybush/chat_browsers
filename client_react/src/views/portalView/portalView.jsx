@@ -4,7 +4,7 @@ import Dashboard from "./components/dashboard";
 import LandingPage from "./components/landingPage";
 
 const PortalView = () => {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({});
   const [isLogin, setIsLogin] = useState(false);
   const [existUser, setExistUser] = useState(null);
   useEffect(() => {
@@ -15,16 +15,15 @@ const PortalView = () => {
 
   useEffect(() => {
     const isValid = async () => {
-      try {
-        if (user) {
-          let response = await getUserDetailsFromAccessToken();
-          if (response) {
-            setExistUser(response.data);
-            setUserDetailsInLocalStorage(response.data);
-            setIsLogin(true);
-          }
+      if (user && user.access_token) {
+        alert("here");
+        let response = await getUserDetailsFromAccessToken();
+        if (response) {
+          setExistUser(response.data);
+          setUserDetailsInLocalStorage(response.data);
+          setIsLogin(true);
         }
-      } catch (err) { }
+      }
     };
     isValid();
   }, [user]);

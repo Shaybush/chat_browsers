@@ -2,7 +2,7 @@ import React from 'react';
 import DropdownButton from 'react-bootstrap/esm/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { googleLogout } from "@react-oauth/google";
-import Socket from '../groupChat';
+import GroupChat from '../groupChat';
 import { useNavigate } from "react-router-dom";
 import IconFile from '../../../../shared/components/iconFile/iconFile';
 
@@ -30,8 +30,8 @@ const Dashboard = ({ existUser, setExistUser, setIsLogin }) => {
           </Dropdown.Item>
         </DropdownButton>
       </div>
-      {/* chat socket */}
-      <Socket existUser={existUser} />
+      {/* chat container */}
+      <GroupChat existUser={existUser} />
     </div>
   );
 };

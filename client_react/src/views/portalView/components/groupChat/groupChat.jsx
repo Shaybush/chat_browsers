@@ -69,6 +69,10 @@ const GroupChat = () => {
             return (
               <div className={`d-flex align-items-center p-2 text-wrap ${item.id === userData.id ? 'justify-content-end' : ''}`} key={i}>
                 <div className={`${item.id === userData.id ? 'bg-teal-dark' : 'bg-dark bg-opacity-50'} col-auto mw-100 text-black py-2 px-3 mb-3 text-break text-right text-end rounded`}>
+                {/* avatar image */}
+                 {
+                 allMessage[i].id !== allMessage[i - 1]?.id ? <img src={item.img}/> : null
+                 }                
                   <h4 className='text-white'>
                     {item.msg}
                     <p className='text-muted text-sm mt-2'>

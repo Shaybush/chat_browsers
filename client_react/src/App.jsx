@@ -1,10 +1,10 @@
 import "./App.css";
-import HomePage from "../src/components/HomePage/HomePage";
+import PortalView from "./views/portalView";
 
 function App() {
   return (
     <div className="App">
-      <HomePage />
+      <PortalView />
     </div>
   );
 }

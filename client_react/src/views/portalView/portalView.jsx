@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Dashboard from "../dashboardPage";
-import ButtonGoogle from '../buttonGoogleAuth/buttonGoogleAuth';
+import Dashboard from "./components/dashboard";
+import LandingPage from "./components/landingPage";
 
-const HomePage = () => {
-  const [user, setUser] = useState([]);
+const PortalView = () => {
+  const [user, setUser] = useState({});
   const [isLogin, setIsLogin] = useState(false);
   const [existUser, setExistUser] = useState(null);
   useEffect(() => {
@@ -15,16 +15,14 @@ const HomePage = () => {
 
   useEffect(() => {
     const isValid = async () => {
-      try {
-        if (user) {
-          let response = await getUserDetailsFromAccessToken();
-          if (response) {
-            setExistUser(response.data);
-            setUserDetailsInLocalStorage(response.data);
-            setIsLogin(true);
-          }
+      if (user && user.access_token) {
+        let response = await getUserDetailsFromAccessToken();
+        if (response) {
+          setExistUser(response.data);
+          setUserDetailsInLocalStorage(response.data);
+          setIsLogin(true);
         }
-      } catch (err) { }
+      }
     };
     isValid();
   }, [user]);
@@ -52,8 +50,9 @@ const HomePage = () => {
   };
 
   const getUserDetailsFromAccessToken = () => {
+    alert("here");
     return axios.get(
-      `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+      `${import.meta.env.VITE_GOOGLE_AUTH_URL}/oauth2/v1/userinfo?access_token=${user.access_token}`,
       {
         headers: {
           Authorization: `Bearer ${user.access_token}`,
@@ -71,10 +70,10 @@ const HomePage = () => {
     <div>
       {
         isLogin ?
-          <Dashboard existUser={existUser} setExistUser={setExistUser} setIsLogin={setIsLogin} /> : <ButtonGoogle setUser={setUser} />
+          <Dashboard existUser={existUser} setExistUser={setExistUser} setIsLogin={setIsLogin} /> : <LandingPage setUser={setUser} />
       }
     </div>
   );
 };
 
-export default HomePage;
+export default PortalView;

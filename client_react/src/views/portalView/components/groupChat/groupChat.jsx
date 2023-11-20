@@ -101,16 +101,32 @@ const GroupChat = () => {
                  }
                  </div>
                 :  
-               <div className={`d-flex align-items-center p-2 text-wrap ${item.id === userData.id ? 'justify-content-end' : ''} style-div`} key={i}>
-                <div className={`${item.id === userData.id ? 'bg-teal-dark flex-column-reverse' : 'bg-dark bg-opacity-50'} col-auto mw-100 text-black py-2 px-3 mb-3 text-break text-right text-end rounded`}>
-                  <h4 className='text-white'>
-                    {item.msg}
-                    <p className='text-muted text-sm mt-2'>
-                      {item.hours}:{item.minutes}
-                    </p>
-                  </h4>
+                <div>
+                  {
+                    item.id !== userData.id ? 
+                    <div className={`d-flex align-items-center p-2 text-wrap ${item.id === userData.id ? 'justify-content-end' : ''} div-guest `} key={i}>
+                    <div className={`${item.id === userData.id ? 'bg-teal-dark flex-column-reverse' : 'bg-dark bg-opacity-50'} col-auto mw-100 text-black py-2 px-3 mb-3 text-break text-right text-end rounded`}>
+                      <h4 className='text-white'>
+                        {item.msg}
+                        <p className='text-muted text-sm mt-2'>
+                          {item.hours}:{item.minutes}
+                        </p>
+                      </h4>
+                    </div>
+                  </div>
+                  :
+                  <div className={`d-flex align-items-center p-2 text-wrap ${item.id === userData.id ? 'justify-content-end' : ''} div-host`} key={i}>
+                  <div className={`${item.id === userData.id ? 'bg-teal-dark flex-column-reverse' : 'bg-dark bg-opacity-50'} col-auto mw-100 text-black py-2 px-3 mb-3 text-break text-right text-end rounded`}>
+                    <h4 className='text-white'>
+                      {item.msg}
+                      <p className='text-muted text-sm mt-2'>
+                        {item.hours}:{item.minutes}
+                      </p>
+                    </h4>
+                  </div>
                 </div>
-              </div>
+                  }
+                </div>
                 }
               </> 
             );

@@ -148,8 +148,14 @@ p {
 }
 /* style image on chat - end*/
 
-/* style div message from me - start */
-.style-div{
-  margin-right: 57px !important;  
+/* style div message from host - start */
+.div-host{
+  margin-right: 60px !important;  
 }
-/* style div message from me - end */
+/* style div message from host - end */
+
+/* style div message from guest - start */
+.div-guest{
+  margin-left: 60px !important;  
+}
+/* style div message from guest - end */

@@ -50,7 +50,6 @@ const PortalView = () => {
   };
 
   const getUserDetailsFromAccessToken = () => {
-    alert("here");
     return axios.get(
       `${import.meta.env.VITE_GOOGLE_AUTH_URL}/oauth2/v1/userinfo?access_token=${user.access_token}`,
       {

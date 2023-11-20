@@ -123,3 +123,33 @@ p {
 /* borders - end */
 
 /* colors - end */
+
+
+/* style chat - start*/
+.ms-5{
+  margin-left: 85px !important;
+}
+.me-5{
+  margin-right: 5px !important;
+}
+/* style chat - end*/
+
+/* style image on chat - start*/
+.style-my-img-profile{
+  height: 50px;
+  padding-left: 5px;
+  margin-bottom:10px;
+}
+
+.style-guest-profile{
+  height: 50px;
+  margin-right: 15px;
+  margin-bottom:10px;
+}
+/* style image on chat - end*/
+
+/* style div message from me - start */
+.style-div{
+  margin-right: 57px !important;  
+}
+/* style div message from me - end */

@@ -1,16 +1,50 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import IconFile from "../../../../shared/components/iconFile/iconFile";
+import axios from "axios";
 
-const LandingPage = ({ setUser }) => {
+const LandingPage = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const isValid = async () => {
+      if (user && user.access_token) {
+        let response = await getUserDetailsFromAccessToken();
+        if (response) {
+          setUserDetailsInLocalStorage(response.data);
+          navigate("/chat-group")
+        }
+      }
+    };
+    isValid();
+  }, [user]);
+
+  const setUserDetailsInLocalStorage = (userDetails) => {
+    window.localStorage.setItem("userData", JSON.stringify(userDetails));
+  };
+  
+  const getUserDetailsFromAccessToken = () => {
+   return( axios.get(
+      `${import.meta.env.VITE_GOOGLE_AUTH_URL}/oauth2/v1/userinfo?access_token=${user.access_token}`,
+      {
+        headers: {
+          Authorization: `Bearer ${user.access_token}`,
+          Accept: "application/json",
+        },
+      }
+    )
+   )
+  };
+
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => { setUser(codeResponse), navigate("/"); },
+    onSuccess: (codeResponse) => {
+       setUser(codeResponse)
+      },
     onError: (error) => console.log("Login Failed:", error),
   });
-
-
+  
   return (
     <div className="h-100 d-inline-block w-100 d-flex justify-content-center align-items-center">
       {/* google button  */}

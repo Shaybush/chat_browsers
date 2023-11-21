@@ -4,7 +4,7 @@ import LoaderSpinner from "./shared/components/loaderSpinner/loaderSpinner";
 
 const AppRoutes = () => {
   const Login = React.lazy(() => import("./views/portalView"));
-  const Chat = React.lazy(() => import("./views/portalView"));
+  const Chat = React.lazy(() => import("./views/portalView/components/dashboard"));
   const Map = React.lazy(() => import("./views/mapTracker"));
   return (
     <Suspense fallback={
@@ -15,7 +15,7 @@ const AppRoutes = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/" element={<Chat />} />
+          <Route path="/chat-group" element={<Chat />} />
           <Route path="/map" element={<Map />} />
         </Routes>
       </Router>

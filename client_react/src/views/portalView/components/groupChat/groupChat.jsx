@@ -42,10 +42,8 @@ const GroupChat = () => {
 
 
   const onServerListen = (_item) => {
-    console.log(isStringEmptyUtil(_item.msg));
     if (!isStringEmptyUtil(_item.msg)) {
       setAllMessage((prev) => [...prev, { ..._item, msg: _item.msg.trim() }]);
-
       // save messages on local storage
       localStorage.setItem('messages', JSON.stringify(allMessage));
     }

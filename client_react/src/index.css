@@ -165,3 +165,18 @@ p {
   margin-left: 60px !important;
 }
 /* style div message from guest - end */
+
+/* dropdown override */
+#dropdown-button {
+  padding: 0 !important;
+  margin: 0 !important;
+  text-align: left;
+}
+#dropdown-button::after {
+  display: none;
+}
+
+.dropdown-menu {
+  padding: 0 !important;
+}
+/* dropdown override - end */

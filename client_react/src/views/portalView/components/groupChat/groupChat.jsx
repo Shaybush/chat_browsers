@@ -89,9 +89,9 @@ const GroupChat = () => {
                       {item.id !== userData.id && <img src={item.img} className="rounded-circle style-my-img-profile me-2" />}
                       <DropdownButton className='col-auto mw-75' id="dropdown-button" title={
                         <ChatMessage message={item} userId={userData.id} isFirstMessage={true} />}>
-                        <Dropdown.Item onClick={() => onDelete(item.msg_id)}>
+                        {item.id === userData.id && <Dropdown.Item onClick={() => onDelete(item.msg_id)}>
                           Delete
-                        </Dropdown.Item>
+                        </Dropdown.Item>}
                       </DropdownButton>
 
                       {item.id === userData.id && <img src={item.img} className="rounded-circle style-my-img-profile" />}
@@ -101,9 +101,9 @@ const GroupChat = () => {
                     <div className={`d-flex align-items-center mb-2 px-2 text-wrap ${item.id === userData.id ? "justify-content-end div-host" : "div-guest"}`}>
                       <DropdownButton className='col-auto mw-75' id="dropdown-button" title={
                         <ChatMessage message={item} userId={userData.id} />}>
-                        <Dropdown.Item onClick={() => onDelete(item.msg_id)}>
+                        {item.id === userData.id && <Dropdown.Item onClick={() => onDelete(item.msg_id)}>
                           Delete
-                        </Dropdown.Item>
+                        </Dropdown.Item>}
                       </DropdownButton>
                     </div>
                 }

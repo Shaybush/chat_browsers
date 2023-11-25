@@ -25,7 +25,6 @@ exports.createSocket = (server) => {
     });
 
     socket.on("message_delete", (messageId) => {
-      console.log(messageId);
       io.sockets.emit("message_delete_event", messageId);
     });
   });

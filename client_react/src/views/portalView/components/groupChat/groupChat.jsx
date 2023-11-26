@@ -48,7 +48,10 @@ const GroupChat = () => {
     }
   };
 
-  const onMessageDelete = (_messageId) => setAllMessage(prev => prev.filter(message => message.msg_id != _messageId));
+  const onMessageDelete = (_messageId) => {
+    setAllMessage(prev => prev.filter(message => message.msg_id != _messageId));
+    localStorage.setItem("messages", JSON.stringify(allMessage.filter(message => message.msg_id != _messageId)));
+  };
 
   const onDelete = (messageId) => {
     if (confirm('Are you sure you want to delete?'))
@@ -100,16 +103,16 @@ const GroupChat = () => {
 
                       {item.id === userData.id && <img src={item.img} className="rounded-circle style-my-img-profile" />}
                     </div>
-                  ) : (
-                // message without avatar image (sec or larger)
-                <div className={`d-flex align-items-center mb-2 px-2 text-wrap ${item.id === userData.id ? "justify-content-end div-host" : "div-guest"}`}>
-                  <DropdownButton className='col-auto mw-75' id="dropdown-button" title={
-                    <ChatMessage message={item} userId={userData.id} />}>
-                    {item.id === userData.id && <Dropdown.Item onClick={() => onDelete(item.msg_id)}>
-                      Delete
-                    </Dropdown.Item>}
-                  </DropdownButton>
-                </div>
+                    :
+                    // message without avatar image (sec or larger)
+                    <div className={`d-flex align-items-center mb-2 px-2 text-wrap ${item.id === userData.id ? "justify-content-end div-host" : "div-guest"}`}>
+                      <DropdownButton className='col-auto mw-75' id="dropdown-button" title={
+                        <ChatMessage message={item} userId={userData.id} />}>
+                        {item.id === userData.id && <Dropdown.Item onClick={() => onDelete(item.msg_id)}>
+                          Delete
+                        </Dropdown.Item>}
+                      </DropdownButton>
+                    </div>
                 }
               </React.Fragment>
             );

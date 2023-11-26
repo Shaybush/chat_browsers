@@ -1,29 +1,28 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
-import { isStringEmptyUtil } from '../../../../shared/services/util/string-util.service';
-import { getTimeFromCurrentUnix } from '../../../../shared/services/util/date-util.service';
+import { isStringEmptyUtil } from "../../../../shared/services/util/string-util.service";
+import { getTimeFromCurrentUnix } from "../../../../shared/services/util/date-util.service";
+import { isArrayEmpty } from "../../../../shared/services/util/array-util.service";
 import ChatMessage from './chatMessage';
 import DropdownButton from 'react-bootstrap/esm/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 const GroupChat = () => {
-  // all the messages go here 
+  // all the messages go here
   const [allMessage, setAllMessage] = useState([]);
   const [userNameFromSocket, setUserNameFromSocket] = useState("");
   const [typing, setTyping] = useState(false);
+  const [userData, setUserData] = useState(
+    JSON.parse(localStorage.getItem("userData"))
+  );
   const socket = io("http://localhost:3001");
   const inputRef = useRef();
-  const userData = JSON.parse(localStorage.getItem("userData"));
-  //get all message from local storage 
-  useEffect(() => {
-    const messages = JSON.parse(localStorage.getItem("messages"));
-    if (messages) {
-      setAllMessage(messages);
-    }
-  }, []);
 
   useEffect(() => {
     socket.on("nodeObjEvent", onServerListen);
+    const messages = JSON.parse(localStorage["messages"]);
+    if (messages || !isArrayEmpty(messages)) setAllMessage(messages);
+
     socket.on("message_delete_event", onMessageDelete);
     return () => {
       // end event listener
@@ -33,23 +32,19 @@ const GroupChat = () => {
   }, []);
 
   useEffect(() => {
-    socket.on("typing-from-server", (id, name) => {
-      // checking if received user typing is current user
-      if (userData.id !== id) {
-        setUserNameFromSocket(name);
-        setTyping(true);
-        setTimeout(() => {
-          setTyping(false);
-        }, 1000);
-      }
-    }, [socket]);
+    socket.on(
+      "typing-from-server",
+      (id) => {
+        // checking if received user typing is current user
+        if (userData.id !== id) typingEvent();
+      },
+      [socket]
+    );
   });
 
   const onServerListen = (_item) => {
     if (!isStringEmptyUtil(_item.msg)) {
       setAllMessage((prev) => [...prev, { ..._item, msg: _item.msg.trim() }]);
-      // save messages on local storage
-      localStorage.setItem('messages', JSON.stringify(allMessage));
     }
   };
 
@@ -70,9 +65,18 @@ const GroupChat = () => {
       time: getTimeFromCurrentUnix(Date.now()),
       img: userData.picture,
     };
-    // clear input 
+    // clear input
     inputRef.current.value = "";
     socket.emit("clientObjEvent", message);
+    localStorage.setItem("messages", JSON.stringify([...allMessage, message]));
+  };
+
+  const typingEvent = () => {
+    setUserNameFromSocket(name);
+    setTyping(true);
+    setTimeout(() => {
+      setTyping(false);
+    }, 1000);
   };
 
   return (
@@ -96,23 +100,27 @@ const GroupChat = () => {
 
                       {item.id === userData.id && <img src={item.img} className="rounded-circle style-my-img-profile" />}
                     </div>
-                    :
-                    // message without avatar image (sec or larger)
-                    <div className={`d-flex align-items-center mb-2 px-2 text-wrap ${item.id === userData.id ? "justify-content-end div-host" : "div-guest"}`}>
-                      <DropdownButton className='col-auto mw-75' id="dropdown-button" title={
-                        <ChatMessage message={item} userId={userData.id} />}>
-                        {item.id === userData.id && <Dropdown.Item onClick={() => onDelete(item.msg_id)}>
-                          Delete
-                        </Dropdown.Item>}
-                      </DropdownButton>
-                    </div>
+                  ) : (
+                // message without avatar image (sec or larger)
+                <div className={`d-flex align-items-center mb-2 px-2 text-wrap ${item.id === userData.id ? "justify-content-end div-host" : "div-guest"}`}>
+                  <DropdownButton className='col-auto mw-75' id="dropdown-button" title={
+                    <ChatMessage message={item} userId={userData.id} />}>
+                    {item.id === userData.id && <Dropdown.Item onClick={() => onDelete(item.msg_id)}>
+                      Delete
+                    </Dropdown.Item>}
+                  </DropdownButton>
+                </div>
                 }
               </React.Fragment>
             );
           })}
         </div>
         {/* user typing */}
-        {<div className="typing-container d-flex ms-2"> {`${typing ? `${userNameFromSocket} typing...` : ''}`}</div>}
+        {
+          <div className="typing-container d-flex ms-2">
+            {`${typing ? `${userNameFromSocket} typing...` : ""}`}
+          </div>
+        }
 
         {/* input message */}
         <form onSubmit={onSub} className="chat-form bg-white p-2 d-flex align-items-center justify-content-center">

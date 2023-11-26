@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { isStringEmptyUtil } from "../../../../shared/services/util/string-util.service";
 import { getTimeFromCurrentUnix } from "../../../../shared/services/util/date-util.service";
+import { isArrayEmpty } from "../../../../shared/services/util/array-util.service";
 
 const GroupChat = () => {
   // all the messages go here
@@ -16,7 +17,7 @@ const GroupChat = () => {
 
   useEffect(() => {
     socket.on("nodeObjEvent", onServerListen);
-    const messages = JSON.parse(localStorage.getItem("messages"));
+    const messages = JSON.parse(localStorage["messages"]);
     if (messages || !isArrayEmpty(messages)) setAllMessage(messages);
 
     return () => {
@@ -28,7 +29,7 @@ const GroupChat = () => {
   useEffect(() => {
     socket.on(
       "typing-from-server",
-      (id, name) => {
+      (id) => {
         // checking if received user typing is current user
         if (userData.id !== id) typingEvent();
       },
@@ -37,15 +38,13 @@ const GroupChat = () => {
   });
 
   const onServerListen = (_item) => {
-    if (!isStringEmptyUtil(_item.msg))
+    if (!isStringEmptyUtil(_item.msg)) {
       setAllMessage((prev) => [...prev, { ..._item, msg: _item.msg.trim() }]);
-
-    setTimeout(() => {
-      localStorage.setItem("messages", JSON.stringify(allMessage));
-    }, 2000);
+    }
   };
 
   const onSub = (e) => {
+    console.log("sent")
     e.preventDefault();
     const message = {
       msg: inputRef.current.value,
@@ -57,6 +56,7 @@ const GroupChat = () => {
     // clear input
     inputRef.current.value = "";
     socket.emit("clientObjEvent", message);
+    localStorage.setItem("messages", JSON.stringify([...allMessage, message]));
   };
 
   const typingEvent = () => {

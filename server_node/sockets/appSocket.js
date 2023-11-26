@@ -23,5 +23,9 @@ exports.createSocket = (server) => {
       const fullName = `${name} ${lastName}`;
       socket.broadcast.emit("typing-from-server", id, fullName);
     });
+
+    socket.on("message_delete", (messageId) => {
+      io.sockets.emit("message_delete_event", messageId);
+    });
   });
 };

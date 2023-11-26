@@ -6,6 +6,7 @@ import { isArrayEmpty } from "../../../../shared/services/util/array-util.servic
 import ChatMessage from './chatMessage';
 import DropdownButton from 'react-bootstrap/esm/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import IconFile from "../../../../shared/components/iconFile/iconFile";
 
 const GroupChat = () => {
   // all the messages go here
@@ -82,6 +83,17 @@ const GroupChat = () => {
     }, 1000);
   };
 
+  const arr = [
+    {
+      name: "shay",
+      icon: 'delete-icon'
+    },
+    {
+      name: "aviv",
+      icon: 'check-icon'
+    }
+  ];
+
   return (
     <div className="container">
       <div className="w-100 border border-3 rounded-2 border-dark mx-auto col-md-6 mt-3">
@@ -96,8 +108,9 @@ const GroupChat = () => {
                       {item.id !== userData.id && <img src={item.img} className="rounded-circle style-my-img-profile me-2" />}
                       <DropdownButton className='col-auto mw-75' id="dropdown-button" title={
                         <ChatMessage message={item} userId={userData.id} isFirstMessage={true} />}>
-                        {item.id === userData.id && <Dropdown.Item onClick={() => onDelete(item.msg_id)}>
-                          Delete
+                        {item.id === userData.id && <Dropdown.Item className="d-flex align-items-center" onClick={() => onDelete(item.msg_id)}>
+                          <IconFile iconSrc={'delete-icon'} />
+                          <p>Delete</p>
                         </Dropdown.Item>}
                       </DropdownButton>
 
@@ -108,8 +121,9 @@ const GroupChat = () => {
                     <div className={`d-flex align-items-center mb-2 px-2 text-wrap ${item.id === userData.id ? "justify-content-end div-host" : "div-guest"}`}>
                       <DropdownButton className='col-auto mw-75' id="dropdown-button" title={
                         <ChatMessage message={item} userId={userData.id} />}>
-                        {item.id === userData.id && <Dropdown.Item onClick={() => onDelete(item.msg_id)}>
-                          Delete
+                        {item.id === userData.id && <Dropdown.Item className="d-flex align-items-center" onClick={() => onDelete(item.msg_id)}>
+                          <IconFile iconSrc={'delete-icon'} />
+                          <p>Delete</p>
                         </Dropdown.Item>}
                       </DropdownButton>
                     </div>

@@ -3,7 +3,9 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import IconFile from "../../../../shared/components/iconFile/iconFile";
 
-const LandingPage = ({ setUser }) => {
+const navigate = useNavigate();
+
+const LandingView = ({ setUser }) => {
   const navigate = useNavigate();
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => { setUser(codeResponse), navigate("/"); },
@@ -24,4 +26,4 @@ const LandingPage = ({ setUser }) => {
   );
 };
 
-export default LandingPage;
+export default LandingView;

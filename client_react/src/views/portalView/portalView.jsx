@@ -69,7 +69,8 @@ const PortalView = () => {
     <div>
       {
         isLogin ?
-          <Dashboard existUser={existUser} setExistUser={setExistUser} setIsLogin={setIsLogin} /> : <LandingPage setUser={setUser} />
+          <Dashboard existUser={existUser} setExistUser={setExistUser} setIsLogin={setIsLogin} /> :
+          <LandingPage setUser={setUser} />
       }
     </div>
   );

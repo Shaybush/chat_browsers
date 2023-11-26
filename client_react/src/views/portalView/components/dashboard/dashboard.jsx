@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import DropdownButton from 'react-bootstrap/esm/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { googleLogout } from "@react-oauth/google";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import IconFile from '../../../../shared/components/iconFile/iconFile';
 
 const Dashboard = ({ existUser, setExistUser, setIsLogin }) => {
+
   const navigate = useNavigate();
   // log out function to log the user out of google and set the profile array to null
   const logOut = () => {

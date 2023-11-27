@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
-import { isStringEmptyUtil } from "../../../../shared/services/util/string-util.service";
-import { getTimeFromCurrentUnix } from "../../../../shared/services/util/date-util.service";
-import { isArrayEmpty } from "../../../../shared/services/util/array-util.service";
+import { isStringEmptyUtil } from "../../shared/services/util/string-util.service";
+import { getTimeFromCurrentUnix } from "../../shared/services/util/date-util.service";
+import { isArrayEmpty } from "../../shared/services/util/array-util.service";
 import ChatMessage from './chatMessage';
 import DropdownButton from 'react-bootstrap/esm/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
-import IconFile from "../../../../shared/components/iconFile/iconFile";
+import IconFile from "../../shared/components/iconFile/iconFile";
 import Header from "./header";
 
-const GroupChat = () => {
+const GroupChatView = () => {
   // all the messages go here
   const [allMessage, setAllMessage] = useState([]);
   const [userNameFromSocket, setUserNameFromSocket] = useState("");
@@ -22,7 +22,7 @@ const GroupChat = () => {
 
   useEffect(() => {
     socket.on("nodeObjEvent", onServerListen);
-    const messages = JSON.parse(localStorage["messages"]);
+    const messages = localStorage["messages"] && JSON.parse(localStorage["messages"]);
     if (messages || !isArrayEmpty(messages)) setAllMessage(messages);
 
     socket.on("message_delete_event", onMessageDelete);
@@ -86,7 +86,7 @@ const GroupChat = () => {
 
   return (
     <React.Fragment>
-      <Header />
+      <Header userData={userData} />
       <div className="container">
         <div className="w-100 border border-3 rounded-2 border-dark mx-auto col-md-6 mt-3">
           <div className="p-2 chat-container">
@@ -142,4 +142,4 @@ const GroupChat = () => {
   );
 };
 
-export default GroupChat;
+export default GroupChatView;

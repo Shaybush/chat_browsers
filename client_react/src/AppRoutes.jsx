@@ -4,8 +4,8 @@ import LoaderSpinner from "./shared/components/loaderSpinner/loaderSpinner";
 
 const AppRoutes = () => {
   const Login = React.lazy(() => import("./views/landingView"));
-  const GroupChat = React.lazy(() => import("./views/groupChat"));
-  const MapTrackerView = React.lazy(() => import("./views/mapTrackerView"));
+  const GroupChat = React.lazy(() => import("./views/groupChat/groupChatView"));
+  const MapTracker = React.lazy(() => import("./views/mapTrackerView"));
   return (
     <Suspense fallback={
       <div className="w-100 h-screen flex items-center justify-center">
@@ -16,7 +16,7 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/group-chat" element={<GroupChat />} />
-          <Route path="/map" element={<MapTrackerView />} />
+          <Route path="/map" element={<MapTracker />} />
         </Routes>
       </Router>
 

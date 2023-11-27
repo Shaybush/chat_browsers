@@ -21,7 +21,7 @@ const GroupChat = () => {
 
   useEffect(() => {
     socket.on("nodeObjEvent", onServerListen);
-    const messages = JSON.parse(localStorage["messages"]);
+    const messages = localStorage["messages"] && JSON.parse(localStorage["messages"]);
     if (messages || !isArrayEmpty(messages)) setAllMessage(messages);
 
     socket.on("message_delete_event", onMessageDelete);
@@ -83,17 +83,6 @@ const GroupChat = () => {
     }, 1000);
   };
 
-  const arr = [
-    {
-      name: "shay",
-      icon: 'delete-icon'
-    },
-    {
-      name: "aviv",
-      icon: 'check-icon'
-    }
-  ];
-
   return (
     <div className="container">
       <div className="w-100 border border-3 rounded-2 border-dark mx-auto col-md-6 mt-3">
@@ -105,7 +94,7 @@ const GroupChat = () => {
                   // message with avatar image
                   allMessage[i].id !== allMessage[i - 1]?.id ?
                     <div className={`d-flex me-5 mb-2 align-items-center px-2 ${item.id === userData.id && "justify-content-end"}`}>
-                      {item.id !== userData.id && <img src={item.img} className="rounded-circle style-my-img-profile me-2" />}
+                      {item.id !== userData.id && <img src={item.img} className="rounded-circle user-image-profile me-2" />}
                       <DropdownButton className='col-auto mw-75' id="dropdown-button" title={
                         <ChatMessage message={item} userId={userData.id} isFirstMessage={true} />}>
                         {item.id === userData.id && <Dropdown.Item className="d-flex align-items-center" onClick={() => onDelete(item.msg_id)}>
@@ -114,11 +103,11 @@ const GroupChat = () => {
                         </Dropdown.Item>}
                       </DropdownButton>
 
-                      {item.id === userData.id && <img src={item.img} className="rounded-circle style-my-img-profile" />}
+                      {item.id === userData.id && <img src={item.img} className="rounded-circle user-image-profile" />}
                     </div>
                     :
                     // message without avatar image (sec or larger)
-                    <div className={`d-flex align-items-center mb-2 px-2 text-wrap ${item.id === userData.id ? "justify-content-end div-host" : "div-guest"}`}>
+                    <div className={`d-flex align-items-center mb-2 px-2 text-wrap ${item.id === userData.id ? "justify-content-end chat-group-host-container" : "chat-group-guest-container"}`}>
                       <DropdownButton className='col-auto mw-75' id="dropdown-button" title={
                         <ChatMessage message={item} userId={userData.id} />}>
                         {item.id === userData.id && <Dropdown.Item className="d-flex align-items-center" onClick={() => onDelete(item.msg_id)}>

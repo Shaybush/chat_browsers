@@ -9,7 +9,9 @@ import AppRoutes from './AppRoutes';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <GoogleOAuthProvider clientId="147486987874-arr7g0b2u38drkrjrg5ri67gm731vr8r.apps.googleusercontent.com">
-    <AppRoutes />
+    <AppRoutes>
+      <App />
+    </AppRoutes>
   </GoogleOAuthProvider>
 );
 reportWebVitals();

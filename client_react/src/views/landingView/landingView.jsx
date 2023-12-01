@@ -41,7 +41,7 @@ const LandingView = () => {
   };
 
   const setUserDetailsInLocalStorage = (userDetails) => {
-    window.localStorage.setItem("userData", JSON.stringify(userDetails));
+    localStorage.setItem("userData", JSON.stringify(userDetails));
   };
   return (
     <div className="h-100 d-inline-block w-100 d-flex justify-content-center align-items-center">

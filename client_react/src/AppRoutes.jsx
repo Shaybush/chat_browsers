@@ -4,7 +4,7 @@ import LoaderSpinner from "./shared/components/loaderSpinner/loaderSpinner";
 
 const AppRoutes = () => {
   const Login = React.lazy(() => import("./views/landingView"));
-  const GroupChatView = React.lazy(() => import("./views/groupChat/groupChatView"));
+  const GroupChatView = React.lazy(() => import("./views/groupChatView"));
   const MapTrackerView = React.lazy(() => import("./views/mapTrackerView"));
   return (
     <Suspense fallback={

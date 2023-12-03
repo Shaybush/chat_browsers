@@ -141,27 +141,21 @@ p {
 /* style chat - end*/
 
 /* style image on chat - start*/
-.style-my-img-profile {
+.user-image-profile {
   height: 50px;
   padding-left: 5px;
-  margin-bottom: 10px;
-}
-
-.style-guest-profile {
-  height: 50px;
-  margin-right: 15px;
   margin-bottom: 10px;
 }
 /* style image on chat - end*/
 
 /* style div message from host - start */
-.div-host {
+.chat-group-host-container {
   margin-right: 60px !important;
 }
 /* style div message from host - end */
 
 /* style div message from guest - start */
-.div-guest {
+.chat-group-guest-container {
   margin-left: 60px !important;
 }
 /* style div message from guest - end */

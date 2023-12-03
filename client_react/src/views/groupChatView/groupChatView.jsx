@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import { isStringEmptyUtil } from "../../shared/services/util/string-util.service";
 import { getTimeFromCurrentUnix } from "../../shared/services/util/date-util.service";
 import { isArrayEmpty } from "../../shared/services/util/array-util.service";
-import ChatMessage from './chatMessage';
+import ChatMessage from './chatMessage/chatMessage';
 import DropdownButton from 'react-bootstrap/esm/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import IconFile from "../../shared/components/iconFile/iconFile";
@@ -45,7 +45,7 @@ const GroupChatView = () => {
   });
 
   const onServerListen = (_item) => {
-    if (!isStringEmptyUtil(_item.msg)) {
+    if (!isStringEmptyUtil(_item.msg)) { 
       setAllMessage((prev) => [...prev, { ..._item, msg: _item.msg.trim() }]);
     }
   };
@@ -97,7 +97,7 @@ const GroupChatView = () => {
                     // message with avatar image
                     allMessage[i].id !== allMessage[i - 1]?.id ?
                       <div className={`d-flex me-5 mb-2 align-items-center px-2 ${item.id === userData.id && "justify-content-end"}`}>
-                        {item.id !== userData.id && <img src={item.img} className="rounded-circle style-my-img-profile me-2" />}
+                       {item.id !== userData.id && <img src={item.img} className="rounded-circle user-image-profile me-1" />}
                         <DropdownButton className='col-auto mw-75' id="dropdown-button" title={
                           <ChatMessage message={item} userId={userData.id} isFirstMessage={true} />}>
                           {item.id === userData.id && <Dropdown.Item className="d-flex align-items-center" onClick={() => onDelete(item.msg_id)}>
@@ -106,11 +106,11 @@ const GroupChatView = () => {
                           </Dropdown.Item>}
                         </DropdownButton>
 
-                        {item.id === userData.id && <img src={item.img} className="rounded-circle style-my-img-profile" />}
+                        {item.id === userData.id && <img src={item.img} className="rounded-circle user-image-profile" />}
                       </div>
                       :
                       // message without avatar image (sec or larger)
-                      <div className={`d-flex align-items-center mb-2 px-2 text-wrap ${item.id === userData.id ? "justify-content-end div-host" : "div-guest"}`}>
+                      <div className={`d-flex align-items-center mb-2 px-2 text-wrap ${item.id === userData.id ? "justify-content-end chat-group-host-container" : "chat-group-guest-container"}`}>
                         <DropdownButton className='col-auto mw-75' id="dropdown-button" title={
                           <ChatMessage message={item} userId={userData.id} />}>
                           {item.id === userData.id && <Dropdown.Item className="d-flex align-items-center" onClick={() => onDelete(item.msg_id)}>
